@@ -524,7 +524,7 @@ class ImportanceDrivenCoverage:
             filtered_output = relevant_neuron_output[relevant_neuron_output != 0]
             if not len(filtered_output) < 10:
                 clusterSize = list(range(2, 5))  # [2, 3, 4]
-
+                # multi-process version
                 partial_cluster = partial(clustering, output=filtered_output)
                 with Pool(processes=5) as p:
                     results = p.map(partial_cluster, clusterSize)
@@ -532,6 +532,8 @@ class ImportanceDrivenCoverage:
                 maxSilhouette_score_idx = np.argmax(silhouette_scores)
                 bestKMean = results[maxSilhouette_score_idx][1]
                 values = bestKMean.cluster_centers_.squeeze()
+
+                # single-process version
                 # clustersDict = {}
                 # for clusterNum in clusterSize:
                 #     kmeans = cluster.KMeans(n_clusters=clusterNum)
