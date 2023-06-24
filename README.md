@@ -27,6 +27,8 @@ In Deep Neural Network (DNN) testing, many test coverage metrics have been propo
 The version of related libraries are in the `requirements.txt`. You can install related libraries with the following command：
 
 ```shell
+conda create -n coverage python=3.6
+conda activate coverage
 pip install -r requirements.txt
 ```
 
@@ -90,7 +92,7 @@ pip install -r requirements.txt
 
 
 📢 If your goal is to obtain coverage information for DNN models using this artifact, without the need to reproduce our experiments, you can directly run the `coverage/get_coverage.py`.
-> python -u coverage/get_coverage.py 
+> python -m coverage.get_coverage 
 
 ### Running
 

@@ -47,7 +47,7 @@ if __name__ == "__main__":
     print(f"INFO: {dataset, network} value range of clean images :[{np.min(x_test)},{np.max(x_test)}]")
 
     x_train, y_train = dataloader.load_train_set(dataset)
-    x_train, y_train = x_train[:1000], y_train[:1000]
+    # x_train, y_train = x_train[:1000], y_train[:1000]
     x_train = dataloader.preprocess_dataset(dataset, network, x_train)
     print(f"INFO: {dataset, network} value range of train images :[{np.min(x_train)},{np.max(x_train)}]")
 
