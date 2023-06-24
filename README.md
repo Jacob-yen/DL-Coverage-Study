@@ -38,6 +38,10 @@ pip install -r requirements.txt
 ├── README.md
 ├── coverage  
 │   ├── __init__.py
+|   ├── get_coverage.py
+|   ├── files
+│   │   ├── boundary_values
+│   │   └── models
 │   ├── case_study
 │   │   ├── __init__.py
 │   │   └── case_sc_U.py # script to investigate the influence of U on performance of SA-based coverage
@@ -82,8 +86,11 @@ pip install -r requirements.txt
 ├── run_rq3.sh # commands to run rq3 with one diversity unit
 └── run_rq4.sh # commands to run rq3 with saturated diversity
 ```
-
 **Note:** `rq3` refers to the experiments with one diversity unit in `research question3` and `rq4` refers to experiments with saturated diversity in `research question3`
+
+
+📢 If your goal is to obtain coverage information for DNN models using this artifact, without the need to reproduce our experiments, you can directly run the `coverage/get_coverage.py`.
+> python -u coverage/get_coverage.py 
 
 ### Running
 

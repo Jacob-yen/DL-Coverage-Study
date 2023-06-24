@@ -35,9 +35,11 @@ if __name__ == "__main__":
 
     common_utils.create_path(sa_intermedia_path, idc_intermedia_path)
     boundary = common_utils.load_boundary(dataset=dataset, network=network)
+    # We can add new models in model_utils.load_model to support more models.
     model = model_utils.load_model(network=network, dataset=dataset)
     # direct use `size_per_class` correctly classified images
     # clean images are standardized and need to be preprocessed.
+    # We can add new dataset in dataloader.load_dataset to support more datasets.
     x_test, y_test = dataloader.load_dataset(dataset)
     x_test, y_test = x_test[:100], y_test[:100]
     x_test = dataloader.preprocess_dataset(dataset, network, x_test)
@@ -45,6 +47,7 @@ if __name__ == "__main__":
     print(f"INFO: {dataset, network} value range of clean images :[{np.min(x_test)},{np.max(x_test)}]")
 
     x_train, y_train = dataloader.load_train_set(dataset)
+    x_train, y_train = x_train[:1000], y_train[:1000]
     x_train = dataloader.preprocess_dataset(dataset, network, x_train)
     print(f"INFO: {dataset, network} value range of train images :[{np.min(x_train)},{np.max(x_train)}]")
 

@@ -486,7 +486,7 @@ class ImportanceDrivenCoverage:
             qtized = np.load(qtized_path, allow_pickle=True)
             print(qtized)
         else:
-            print("Clustering results NOT FOUND; Calculating them now!")
+            print("Clustering results NOT FOUND; Calculating them now!. It would take a while.")
             train_layer_out = self.temp_model.predict(
                 self.train_inputs, verbose=1)
             s1 = datetime.now()
@@ -524,25 +524,16 @@ class ImportanceDrivenCoverage:
             filtered_output = relevant_neuron_output[relevant_neuron_output != 0]
             if not len(filtered_output) < 10:
                 clusterSize = list(range(2, 5))  # [2, 3, 4]
-                # multi-process version
-                partial_cluster = partial(clustering, output=filtered_output)
-                with Pool(processes=5) as p:
-                    results = p.map(partial_cluster, clusterSize)
-                silhouette_scores = [t[0] for t in results]
-                maxSilhouette_score_idx = np.argmax(silhouette_scores)
-                bestKMean = results[maxSilhouette_score_idx][1]
-                values = bestKMean.cluster_centers_.squeeze()
 
-                # single-process version
-                # clustersDict = {}
-                # for clusterNum in clusterSize:
-                #     kmeans = cluster.KMeans(n_clusters=clusterNum)
-                #     clusterLabels = kmeans.fit_predict(np.array(filtered_output).reshape(-1, 1))
-                #     silhouetteAvg = silhouette_score(np.array(filtered_output).reshape(-1, 1), clusterLabels)
-                #     clustersDict[silhouetteAvg] = kmeans
-                # maxSilhouetteScore = max(clustersDict.keys())
-                # bestKMean = clustersDict[maxSilhouetteScore]
-                # values = bestKMean.cluster_centers_.squeeze()
+                clustersDict = {}
+                for clusterNum in clusterSize:
+                    kmeans = cluster.KMeans(n_clusters=clusterNum)
+                    clusterLabels = kmeans.fit_predict(np.array(filtered_output).reshape(-1, 1))
+                    silhouetteAvg = silhouette_score(np.array(filtered_output).reshape(-1, 1), clusterLabels)
+                    clustersDict[silhouetteAvg] = kmeans
+                maxSilhouetteScore = max(clustersDict.keys())
+                bestKMean = clustersDict[maxSilhouetteScore]
+                values = bestKMean.cluster_centers_.squeeze()
             else:
                 # values = [0]
                 # print(f"ERROR: Unable to cluster for rel neuron {relevant_neuron} "
