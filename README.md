@@ -22,9 +22,15 @@ In Deep Neural Network (DNN) testing, many test coverage metrics have been propo
 | 20-Newsgroups   | TextCNN      | 77.68       | text   | CNN     |
 
 **Notes:** We use 1 - MSE (Mean Square Error) as the accuracy of regression models. 
+#### 📢 Data Availability
+The models and datasets can be found [here.](https://tjueducn-my.sharepoint.com/:f:/g/personal/yanming_tju_edu_cn/Ekdw8I85RS9BvMqqiXmbzx4Bc2_9bu7naHQApHIxuQ0ivA?e=Ha7HhJ) **Password: ui0p**
+- **model.zip**: The models used in our study.
+- **original-dataset.zip**: The original test set of Driving and 20-Newsgroups.
+- **adv-data.zip**: The generated adversarial examples (excluding Speech-Commands).
+- **speech-commands_deepspeech.zip**: The original test set and the generated adversarial examples for Speech-Commands. Please place the folders `adv` and `audio` according to the path specified in `speechcmd_xxx.csv`.
 
 ### Environment configuration
-The version of related libraries are in the `requirements.txt`. You can install related libraries with the following command：
+The versions of related libraries are in the `requirements.txt`. You can install related libraries with the following command：
 
 ```shell
 conda create -n coverage python=3.6
